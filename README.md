@@ -97,16 +97,14 @@ Set-Content -Path "C:\Program Files\WindowsPowerShell\Modules\AzStackHci.Environ
 ```
 
 #### 6. Arc onboarding
-Register the machine with Azure Arc: (Onboard by script)[https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-without-azure-arc-gateway?view=azloc-2509&tabs=script&pivots=register-proxy#step-1-review-script-parameters]
+Register the machine with Azure Arc: [Onboard by script](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-without-azure-arc-gateway?view=azloc-2509&tabs=script&pivots=register-proxy#step-1-review-script-parameters)
 ```
-$Subscription = "<my de06483a-93e9-47a0-a81b-ad49342e23f7"
+$Tenant = <"my TenantID">
+$Subscription = "<my subscription">
 $RG = "<my resource group>"
 $Region = "<my region>"
 $Tenant = "<my tenant>"
-Connect-AzAccount -SubscriptionId $Subscription -TenantId $Tenant -DeviceCode
-$ARMtoken = (Get-AzAccessToken -WarningAction SilentlyContinue).Token
-$id = (Get-AzContext).Account.Id   
-Invoke-AzStackHciArcInitialization -SubscriptionID $Subscription -ResourceGroup $RG -TenantID $Tenant -Region $Region -Cloud "AzureCloud" -ArmAccessToken $ARMtoken -AccountID $id
+Invoke-AzStackHciArcInitialization -TenantId $Tenant -SubscriptionID $Subscription -ResourceGroup $RG -Region $Region -Cloud "AzureCloud"
 ```
 
 #### Azure Portal - deploy Azure Local:  
