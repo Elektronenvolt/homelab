@@ -56,22 +56,10 @@ DNS: 192.168.0.1
 ```
 
 #### 2. hostname
-Set the hostname to `myhostname` with Sconfig. Add a DNS entry `myhostname.mydomain.com` at your local DNS server / domain hoster - in my case the DNS server of the hosting provider. Verify with
+Set the hostname to `myhostname` with Sconfig and restart the machine. Add a DNS entry `myhostname.mydomain.com` at your local DNS server / domain hoster - in my case the DNS server of the hosting provider. Verify with
 ``` 
 nslookup myhostname
 nslookup myhostname.mydomain.com
-```
-
-#### 3. set DNS zone
-Set registry key with the zone name/FQDN on each node 
-```
-$zoneName = "mydomain.com" 
-$RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters' 
-Set-ItemProperty -Path $RegistryPath -Name 'Domain' -Value $zoneName
-```
-and restart the machine with
-```
-Restart-Computer
 ```
 
 #### 4. deployment user
@@ -99,11 +87,10 @@ Set-Content -Path "C:\Program Files\WindowsPowerShell\Modules\AzStackHci.Environ
 #### 6. Arc onboarding
 Register the machine with Azure Arc: [Onboard by script](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-without-azure-arc-gateway?view=azloc-2509&tabs=script&pivots=register-proxy#step-1-review-script-parameters)
 ```
-$Tenant = <"my TenantID">
+$Tenant = "<my tenant>"
 $Subscription = "<my subscription">
 $RG = "<my resource group>"
 $Region = "<my region>"
-$Tenant = "<my tenant>"
 Invoke-AzStackHciArcInitialization -TenantId $Tenant -SubscriptionID $Subscription -ResourceGroup $RG -Region $Region -Cloud "AzureCloud"
 ```
 
