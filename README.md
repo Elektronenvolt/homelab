@@ -167,3 +167,7 @@ az k8s-runtime load-balancer create --load-balancer-name $lbName --resource-uri 
 ```
 az aksarc get-credentials -g $rg -n $name= --admin
 ```
+
+## Access the machine after deployment
+Remote desktop will be disabled, my best way to access the machine (without having AD features) is, guess what? SSH!  
+Follow the [Enable SSH access to Arc-enabled servers](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview?tabs=azure-cli#enable-ssh-access-to-arc-enabled-servers) isntructions to enable ssh over Azure Portal CLI.
