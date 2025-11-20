@@ -1,5 +1,6 @@
 # A little big home lab Kubernetes cluster
-A home lab Kubernetes cluster using **AKS Arc** on **Azure Local**, built with budget hardware yet having an enterprise-grade feature set.
+**A home lab Kubernetes cluster using `AKS Arc` on `Azure Local`, built with budget hardware yet having an enterprise-grade feature set.**  
+**Version: 11/25:1.0 public preview - Azure Local release [2510](https://learn.microsoft.com/en-us/azure/aks/aksarc/aks-whats-new-local#release-2510)** 
 
 
 Motivated by all the nice setups from [Lior Kamrat](https://www.linkedin.com/in/liorkamrat/recent-activity/all/), I want a home lab as well to run tools, gameservers, my own apps and test a few things from the [CNCF landscape](https://landscape.cncf.io/) in my local network. But there is not enough budget for AI workloads 😜. lets skipt that for now.  
