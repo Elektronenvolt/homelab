@@ -78,8 +78,8 @@ Add-LocalGroupMember -Group "Administrators" -Member "gstoifl"
 ```
 
 #### 5. no ECC mmeory
-I don't have ECC memory modules and need to disable the check, I have luck, there is a feature flag to disable the ECC requirement check.
-This will skip ECC tests, documented in AzStackHciConnectivity\AzStackHci.Connectivity.psm1 and AzStackHciHardware\AzStackHci.Hardware.psm1  
+I don't have ECC memory modules and need to disable the check, I have luck, there is a feature flag to disable the memory requirements check.
+This will skip ECC tests, documented in AzStackHciConnectivity\AzStackHci.EnvironmentChecker.Utilities.psm1 and AzStackHciHardware\AzStackHci.Hardware.psm1  
 ```
 New-Item -Path "C:\Program Files\WindowsPowerShell\Modules\AzStackHci.EnvironmentChecker\ExcludeTests.txt" -ItemType File
 Set-Content -Path "C:\Program Files\WindowsPowerShell\Modules\AzStackHci.EnvironmentChecker\ExcludeTests.txt" -Value "Test-MemoryProperties"
