@@ -74,7 +74,7 @@ $params = @{
     Description = 'local setup'
 }
 New-LocalUser @params
-Add-LocalGroupMember -Group "Administrators" -Member "gstoifl"
+Add-LocalGroupMember -Group "Administrators" -Member "myuser"
 ```
 
 #### 5. no ECC mmeory
