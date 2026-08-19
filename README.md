@@ -1,6 +1,6 @@
 # A little big home lab Kubernetes cluster
 **A home lab Kubernetes cluster using `AKS Arc` on `Azure Local`, built with budget hardware yet having an enterprise-grade feature set.**  
-**Version: 11/25:1.0 public preview - Azure Local release [2510](https://learn.microsoft.com/en-us/azure/aks/aksarc/aks-whats-new-local#release-2510)** 
+**Version: 06/26 - Azure Local release [2606](https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2606)** 
 
 
 Motivated by all the nice setups from [Lior Kamrat](https://www.linkedin.com/in/liorkamrat/recent-activity/all/), I want a home lab as well to run tools, gameservers, my own apps and test a few things from the [CNCF landscape](https://landscape.cncf.io/) in my local network. But there is not enough budget for AI workloads 😜. lets skipt that for now.  
@@ -15,9 +15,13 @@ The much I like [Ben's home lab](https://bcthomas.com/) - there is no rack space
 - [x] Kingston FURY SO-DIMM 64GB KIT DDR5 4800MHz CL38 - 2 modules with 32 GB
 - [x] 1x 1TB Samsung 990 EVO Plus NVMe SSD for the OS
 - [x] 2x 2TB Samsung 990 EVO Plus NVMe SSDs for data  
-By using the Intel I226V RJ45 Ethernet adapter the Azure Local cluster deployment checks complained about 'Network requirements not met - Cannot find valid RSS property, adapter need support RSS. Use Get-NetAdapterRss to verify it. I use the Intel X710 adapater instead, it has [RSS](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling) support, and that's why there is a  
+By using the Intel I226V RJ45 Ethernet adapter the Azure Local cluster deployment checks complained about `Network requirements not met - Cannot find valid RSS property, adapter need support RSS. Use Get-NetAdapterRss to verify it.` I use the Intel X710 adapater instead, it has [RSS](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling) support, and that’s why there is a
 - [x] 1x 10G SFP+ to RJ45 Copper Module
 on the hardware list
+**UPDATE 06/26 ** After re-installing with early 2026 releases - I ran into `ERROR: RDMA setting on adapters are invalid on MS01 Intent Compute_Management_Storage Adapter Override - [ False ]; NetworkDirect - [ 1 ] Wrong configuration for adapters [ Port1 ]: RDMA not supported some adapters, but intent is NOT configured with adapter override to disable NetworkDirect Run "Get-NetAdapterRdma" to check if RDMA is supported on storage adapter(s). ` Checking [ODIN](https://azure.github.io/odinforazurelocal/) and [docs](https://learn.microsoft.com/en-us/azure/azure-local/plan/single-server-deployment?view=azloc-2607) [RDMA](https://learn.microsoft.com/en-us/azure/azure-local/concepts/host-network-requirements#rdma) is shown as required in ODIN and optional in some cases for a single node in the docs, but I didn't figure out in what case it's optional -> adding a network card with RDMA support and using it to continue.
+- [x] Intel E810 Ethernet Controller [network card](https://www.amazon.de/Euqvos-Ethernet-Network-E810-XXVDA2-Chipset-Silvery/dp/B0DLK59LRJ/) 
+The case is full now :-)
+![ms01-intel-eb10](https://www.stoifl.com/img/e810.png)
 
 ### Network:
 I run a [UniFi Dream Machine Special Edition](https://techspecs.ui.com/unifi/cloud-gateways/udm-se) with a public static IP, Wirguard VPN to connect to my home network from everywhere and fullfilling all requirements for any kind of home lab you can imagine. Except the fact that I'm always running out of switch ports 🙄
@@ -49,7 +53,7 @@ Logon to the machine, [Sconfig](https://learn.microsoft.com/en-us/windows-server
 [docs are here](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-local-identity-with-key-vault)  
 
 #### 1. net adapter
-DHCP is not supported, lets configure the Intel X710 adapter IP (RSS support!). I use IP range 192.168.0.1/20 (192.168.0.0 - 192.168.15.255)
+DHCP is not supported, lets configure the Intel E810 adapter IP (RSS and RDMA support!). I use IP range 192.168.0.1/20 (192.168.0.0 - 192.168.15.255)
 ``` 
 192.168.1.1 / 255.255.240.0
 Gateway: 192.168.0.1
