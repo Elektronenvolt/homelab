@@ -170,7 +170,7 @@ az k8s-runtime load-balancer create --load-balancer-name $lbName --resource-uri 
 
 ### Connect to the cluster - ready to use.
 ```
-az aksarc get-credentials -g $rg -n $name= --admin
+az aksarc get-credentials -g $rg -n $name --admin --file .\config
 ```
 
 ## Access the machine after deployment
